@@ -41,17 +41,22 @@
                 <td>{{$elem->image}}</td>
                 <td>{{$elem->cooking_time}}</td>
                 <td>{{$elem->weight}}</td>
-                 <td>
+                 
+                <td>
+                    
                     <form action="{{route('pastas.destroy', $elem->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-dark" type="submit">
-                            <i class="fa-solid fa-xmark"></i>
+                            {{-- <i class="fa-solid fa-xmark"></i> --}}
+                            X
                         </button>
                     </form>
+                    
                     <div>
                         <a href="{{route('pastas.edit', $elem->id)}}">
-                             <i class="fa-solid fa-pen"></i>
+                             {{-- <i class="fa-solid fa-pen"></i> --}}
+                             edit
                         </a>
                     </div>
                  </td>

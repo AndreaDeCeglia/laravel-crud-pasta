@@ -26,7 +26,7 @@ class PastaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.pasta.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class PastaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $new_record = new Pasta();
+        $new_record->fill($data);
+        $new_record->save();
+
+        return redirect()->route('pastas.show', ['pasta' => $new_record->id]);
     }
 
     /**
@@ -48,7 +54,9 @@ class PastaController extends Controller
      */
     public function show($id)
     {
-        //
+        $elem = Pasta::findOrFail($id);
+
+        return view('pages.pasta.show', compact('elem'));
     }
 
     /**
@@ -59,7 +67,9 @@ class PastaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pasta = Pasta::findOrFail($id);
+
+        return view('pages.pasta.edit', compact('pasta'));
     }
 
     /**
@@ -71,7 +81,12 @@ class PastaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $pasta = Pasta::findOrFail($id);
+
+        $pasta->update($data);
+
+        return redirect()->route('pastas.show', $pasta->id);
     }
 
     /**
@@ -82,6 +97,8 @@ class PastaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pasta = Pasta::findOrFail($id);
+        $pasta->delete();
+        return redirect()->route('pastas.index');
     }
 }
